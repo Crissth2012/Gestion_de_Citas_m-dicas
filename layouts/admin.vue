@@ -18,6 +18,9 @@
             Doctores
           </b-navbar-item>
         </b-navbar-dropdown>
+        <b-navbar-item tag="nuxt-link" to="/admin/especialidades">
+          Especialidades
+        </b-navbar-item>
         <b-navbar-item tag="nuxt-link" to="/admin/administradores">
           Administradores
         </b-navbar-item>

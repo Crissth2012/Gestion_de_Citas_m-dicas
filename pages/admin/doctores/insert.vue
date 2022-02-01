@@ -71,19 +71,7 @@
           </option>
         </b-select>
       </b-field>
-      <b-field label="Especialidad">
-        <b-select
-          v-model="formulario.especialidad"
-          placeholder="Seleccione la especialidad"
-        >
-          <option value="odontología">
-            Odotología
-          </option>
-          <option value="pediatría">
-            Pediatría
-          </option>
-        </b-select>
-      </b-field>
+      <InputEspecialidades v-model="formulario.especialidad" />
       <div class="buttons">
         <b-button native-type="submit" type="is-primary">
           Guardar
@@ -98,6 +86,7 @@
 
 <script>
 export default {
+  layout: 'admin',
   /**
    * Esta es una función que retorna un objeto. Cada propiedad del objeto son
    * variables que utiliza el vue para mostrar en la vista.

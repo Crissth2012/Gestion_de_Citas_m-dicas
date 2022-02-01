@@ -37,6 +37,7 @@
 
 <script>
 export default {
+  layout: 'admin',
   /**
    * Esta es una función que retorna un objeto. Cada propiedad del objeto son
    * variables que utiliza el vue para mostrar en la vista.
@@ -72,7 +73,7 @@ export default {
         } else {
           await this.$axios.$post('/api/especialidades', this.formulario)
         }
-        this.$router.push('/especialidades')
+        this.$router.push('/admin/especialidades')
       } catch (err) {
         console.error(err)
       }
