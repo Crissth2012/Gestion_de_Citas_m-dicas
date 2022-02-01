@@ -1,6 +1,7 @@
 import jwt from 'jwt-simple'
 import express from 'express'
 import { hashear } from '../libs/utiles'
+import Pacientes from '../models/pacientes'
 import Administradores from '../models/administradores'
 
 const router = express.Router()
@@ -51,6 +52,35 @@ router.post('/administrador', async (req, res) => {
       res.send(jwt.encode({
         usuario: administrador._id,
         tipo: 'admin'
+      }, SECRET))
+    }
+  } catch (err) { res.status(500).send(err.toString()) }
+})
+
+router.get('/paciente', async (req, res) => {
+  try {
+    const token = req.headers.authorization || req.query.token
+    const decodificado = jwt.decode(token, SECRET)
+    res.send(await Administradores.findOne({
+      _id: decodificado.usuario
+    }, 'nombre correo'))
+  } catch (err) { res.status(500).send(err.toString()) }
+})
+
+router.post('/paciente', async (req, res) => {
+  try {
+    const paciente = await Pacientes.findOne({
+      correo: req.body.correo
+    })
+    if (!paciente) {
+      res.status(500).send('No existe el paciente')
+      return
+    } else if (paciente.contrasena !== hashear(req.body.contrasena)) {
+      res.status(500).send('Contraseña incorrecta')
+    } else {
+      res.send(jwt.encode({
+        usuario: paciente._id,
+        tipo: 'paciente'
       }, SECRET))
     }
   } catch (err) { res.status(500).send(err.toString()) }

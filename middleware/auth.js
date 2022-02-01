@@ -11,6 +11,18 @@ const authMiddleware = ({ app, store, redirect, route: { path, fullPath, query }
       if (mainPath === '/') { mainPath = '' }
       redirect(mainPath + '/login', options)
     }
+  } else {
+    mainPath = '/'
+    if (app.$cookies.get('tokenPaciente')) {
+      if (path.includes('/login')) {
+        redirect(query.redirect || mainPath)
+      }
+    } else if (!path.startsWith('/registro') && !path.includes('/login')) {
+      const options = {}
+      if (mainPath !== path) { options.redirect = fullPath }
+      if (mainPath === '/') { mainPath = '' }
+      redirect(mainPath + '/login', options)
+    }
   }
 }
 
