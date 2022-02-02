@@ -10,6 +10,7 @@ const SECRET = 'JyKbgowtVg4HSx7eOrPW'
 export function getVerificador (tipos) {
   return (req, res, next) => {
     try {
+      if (req.method === 'GET') { return next() }
       const token = req.cookies.tokenAdmin || req.headers.authorization || req.query.token
       if (!token) {
         res.status(500).send('No se proporcionó el token')
@@ -20,6 +21,23 @@ export function getVerificador (tipos) {
         res.status(500).send('Su usuario no tiene autorización para esta función')
         return
       }
+      req.payload = decodificado
+      next()
+    } catch (err) {
+      res.status(500).send(err.toString())
+    }
+  }
+}
+
+export function getVerificadorPaciente () {
+  return (req, res, next) => {
+    try {
+      const token = req.cookies.tokenPaciente
+      if (!token) {
+        res.status(500).send('No se proporcionó el token de paciente')
+        return
+      }
+      const decodificado = jwt.decode(token, SECRET)
       req.payload = decodificado
       next()
     } catch (err) {

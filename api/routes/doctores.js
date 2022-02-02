@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.get('/', async function (req, res) {
   try {
-    const doctores = await Doctores.find()
+    const doctores = await Doctores.find(req.query || {})
     res.json(doctores)
   } catch (err) { res.status(500).send(err.toString()) }
 })

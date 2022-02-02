@@ -1,6 +1,7 @@
 <template>
   <b-field label="Especialidad">
     <b-select
+      expanded
       :value="value"
       placeholder="Seleccione la especialidad"
       @input="$emit('input', $event)"
@@ -19,7 +20,7 @@
 <script>
 export default {
   props: {
-    value: { type: String, default: '' }
+    value: { type: String, default: undefined }
   },
   data () {
     return {

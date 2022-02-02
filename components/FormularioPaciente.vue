@@ -51,6 +51,7 @@
     </b-field>
     <b-field label="Género">
       <b-select
+        expanded
         :value="value.genero"
         placeholder="Género"
         @input="actualizar({ genero: $event })"

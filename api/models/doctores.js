@@ -11,7 +11,7 @@ const doctorSchema = new Schema({
   ciudad: { type: String, required: true },
   fechaNacimiento: { type: Date, required: true },
   genero: { type: String, required: true },
-  especialidad: { type: String, required: true }
+  especialidad: { type: mongoose.Types.ObjectId, required: true }
 })
 
 export default mongoose.model('doctores', doctorSchema)

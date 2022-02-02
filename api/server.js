@@ -3,6 +3,7 @@ import mongoose from 'mongoose'
 import cookieParser from 'cookie-parser'
 
 import pacientes from './routes/pacientes'
+import pacientesMe from './routes/pacientes.me'
 import doctores from './routes/doctores'
 import especialidades from './routes/especialidades'
 import administradores from './routes/administradores'
@@ -18,6 +19,10 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// rutas pacientes
+app.use('/pacientes/me', pacientesMe)
+
+// rutas administrador
 app.use('/pacientes', getVerificador(['admin']), pacientes)
 app.use('/doctores', getVerificador(['admin']), doctores)
 app.use('/especialidades', getVerificador(['admin']), especialidades)

@@ -55,6 +55,7 @@
         <b-select
           v-model="formulario.genero"
           placeholder="Género"
+          expanded
         >
           <option value="Masculino">
             Masculino
